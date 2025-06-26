@@ -6,7 +6,8 @@ FROM maven:3.9-eclipse-temurin-17 AS build-api-service
 # Build lowcoder-api
 COPY ./server/api-service /lowcoder-server
 WORKDIR /lowcoder-server
-RUN --mount=type=cache,id=s/6415c346-7292-4789-b6d9-63481e6f317b-/root/.m2 mvn -f pom.xml,target=/root/.m2 mvn -f pom.xml clean package -DskipTests
+RUN --mount=type=cache,id=s/6415c346-7292-4789-b6d9-63481e6f317b-,target=/root/.m2 \
+    mvn -f pom.xml clean package -DskipTests
 
 # Create required folder structure
 RUN mkdir -p /lowcoder/api-service/config /lowcoder/api-service/logs /lowcoder/plugins
